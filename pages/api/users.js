@@ -1,4 +1,5 @@
 import nextConnect from 'next-connect'
+import argon2 from 'argon2'
 import auth from '../../middleware/auth'
 import { getAllUsers, createUser, findUserByUsername } from '../../lib/db'
 
@@ -11,7 +12,8 @@ handler
     // Remove this in production
     res.json({ users: getAllUsers(req) })
   })
-  .post((req, res) => {
+  .post(
+  async (req, res) => {
     const { username, password, name } = req.body
     if (!username || !password || !name) {
       return res.status(400).send('Missing fields')
@@ -21,10 +23,10 @@ handler
     if (usernameExisted) {
       return res.status(409).send('The username has already been used')
     }
-    const user = { username, password, name }
+    //const user = { username, password, name }
     // Security-wise, you must hash the password before saving it
-    // const hashedPass = await argon2.hash(password);
-    // const user = { username, password: hashedPass, name }
+    const hashedPass = await argon2.hash(password)
+    const user = { username, password: hashedPass, name }
     createUser(req, user)
     req.logIn(user, err => {
       if (err) throw err

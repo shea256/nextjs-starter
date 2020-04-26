@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import Router from 'next/router'
+import { Input, FormGroup } from 'reactstrap'
 import { useUser } from '../lib/hooks'
 
 function ProfileEdit() {
@@ -7,7 +8,7 @@ function ProfileEdit() {
   const nameRef = useRef()
 
   useEffect(() => {
-    if (!user) return
+    if (!user) { return }
     nameRef.current.value = user.name
   }, [user])
 
@@ -17,6 +18,7 @@ function ProfileEdit() {
     const body = {
       name: nameRef.current.value,
     }
+    console.log(body)
     const res = await fetch(`/api/user`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -42,10 +44,15 @@ function ProfileEdit() {
     <>
       <div className="form-container">
         <form onSubmit={handleEditProfile}>
-          <label>
-            <span>Name</span>
-            <input type="text" ref={nameRef} required />
-          </label>
+          <FormGroup>
+            <label>Username</label>
+            <Input type="text" defaultValue={user.username} readOnly />
+          </FormGroup>
+          <FormGroup>
+            <label>Name</label>
+            <Input type="text" ref={nameRef} defaultValue={user.name} required
+              onChange={(event) => nameRef.current.value = event.target.value} />
+          </FormGroup>
           <div className="submit">
             <button type="submit">Update profile</button>
             <a role="button" className="delete" onClick={handleDeleteProfile}>
@@ -62,6 +69,37 @@ function ProfileEdit() {
         .delete:hover {
           color: #b71c1c;
         }
+        .form-container {
+          max-width: 21rem;
+          margin: 0 auto;
+          padding: 1rem;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+        }
+        .error {
+          color: brown;
+          margin: 0.5rem 0;
+          text-align: center;
+        }
+        .submit {
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          justify-content: space-between;
+        }
+        .submit > button {
+          padding: 0.5rem 1rem;
+          cursor: pointer;
+          background: #fff;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+        }
+        .submit > button:hover {
+          border-color: #888;
+        }
+        .submit > a {
+          text-decoration: none;
+        }
       `}</style>
     </>
   )
@@ -72,15 +110,19 @@ export default function ProfilePage() {
 
   useEffect(() => {
     // redirect user to login if not authenticated
-    if (!loading && !user) Router.replace('/login')
+    if (!loading && !user) {
+      Router.replace('/login')
+    }
   }, [user, loading])
 
   return (
     <>
-      <h1>Profile</h1>
+      <h1 className="text-center">
+        Profile
+      </h1>
       {user && (
         <>
-          <p>Your profile: {JSON.stringify(user)}</p>
+          {/*<p>Your profile: {JSON.stringify(user)}</p>*/}
           <ProfileEdit />
         </>
       )}

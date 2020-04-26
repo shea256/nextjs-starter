@@ -8,6 +8,7 @@
   "dependencies": {
     "@hapi/iron": "6.0.0",
     "@segment/snippet": "^4.9.0",
+    "argon2": "^0.26.2",
     "cookie": "0.4.0",
     "dotenv": "^8.2.0",
     "next": "latest",

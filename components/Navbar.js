@@ -28,6 +28,11 @@ export default function Navbar() {
           {user ? (
             <>
               <li>
+                <Link href="/about">
+                  <a className="nav-link">About</a>
+                </Link>
+              </li>
+              <li>
                 <Link href="/profile">
                   <a className="nav-link">Profile</a>
                 </Link>
@@ -40,6 +45,11 @@ export default function Navbar() {
             </>
           ) : (
             <>
+              <li>
+                <Link href="/about">
+                  <a className="nav-link">About</a>
+                </Link>
+              </li>
               <li>
                 <Link href="/signup">
                   <a className="nav-link">Signup</a>
