@@ -18,7 +18,6 @@ function ProfileEdit() {
     const body = {
       name: nameRef.current.value,
     }
-    console.log(body)
     const res = await fetch(`/api/user`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },

@@ -23,7 +23,6 @@ handler
     }
   })
   .put((req, res) => {
-    console.log(req.body)
     const { name } = req.body
     const user = updateUserByUsername(req, req.user.username, { name })
     res.json({ user })

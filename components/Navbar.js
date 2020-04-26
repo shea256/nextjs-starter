@@ -38,9 +38,11 @@ export default function Navbar() {
                 </Link>
               </li>
               <li>
-                <a className="nav-link" onClick={handleLogout}>
-                  Logout
-                </a>
+                <Link href="">
+                  <a className="nav-link" onClick={handleLogout}>
+                    Logout
+                  </a>
+                </Link>
               </li>
             </>
           ) : (
