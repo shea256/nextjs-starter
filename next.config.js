@@ -1,8 +1,11 @@
 require('dotenv').config()
 
+console.log(process.env.TOKEN_SECRET)
+
 module.exports = {
   env: {
     ANALYTICS_WRITE_KEY: '',
+    TOKEN_SECRET: process.env.TOKEN_SECRET,
     SITE_METADATA: {
       name: "NextJS",
       origin: "http://localhost:3000",

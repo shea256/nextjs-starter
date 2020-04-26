@@ -2,7 +2,7 @@ import Head from 'next/head'
 
 const site = process.env.SITE_METADATA
 
-const CustomHead = ({ title, path, description, image }) => (
+const HeadMetadata = ({ title, path, description, image }) => (
   <Head>
     <title>{title}</title>
     <link rel="icon" href="/favicon.ico" />
@@ -24,4 +24,4 @@ const CustomHead = ({ title, path, description, image }) => (
   </Head>
 )
 
-export default CustomHead
+export default HeadMetadata
