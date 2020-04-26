@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import Link from 'next/link'
+import { NavbarToggler, Collapse } from 'reactstrap'
 import { useUser } from '../lib/hooks'
 
 export default function Navbar() {
@@ -9,24 +11,29 @@ export default function Navbar() {
     mutate({ user: null })
   }
 
+  const [isOpen, setIsOpen] = useState(false)
+  const toggle = () => setIsOpen(!isOpen)
+
   return (
     <header>
-      <nav>
-        <ul>
-          <li>
-            <Link href="/">
-              <a>Home</a>
-            </Link>
-          </li>
+      <nav className="navbar navbar-expand-md navbar-light">
+        <Link href="/">
+          <a className="navbar-brand">NextJS</a>
+        </Link>
+        <NavbarToggler onClick={toggle}>
+          <span className="navbar-toggler-icon"></span>
+        </NavbarToggler>
+        <Collapse isOpen={isOpen} navbar>
+          <div className="navbar-nav ml-auto">
           {user ? (
             <>
               <li>
                 <Link href="/profile">
-                  <a>Profile</a>
+                  <a className="nav-link">Profile</a>
                 </Link>
               </li>
               <li>
-                <a role="button" onClick={handleLogout}>
+                <a className="nav-link" onClick={handleLogout}>
                   Logout
                 </a>
               </li>
@@ -35,44 +42,22 @@ export default function Navbar() {
             <>
               <li>
                 <Link href="/signup">
-                  <a>Sign up</a>
+                  <a className="nav-link">Signup</a>
                 </Link>
               </li>
               <li>
                 <Link href="/login">
-                  <a>Login</a>
+                  <a className="nav-link">Login</a>
                 </Link>
               </li>
             </>
           )}
-        </ul>
+          </div>
+        </Collapse>
       </nav>
       <style jsx>{`
-        nav {
-          max-width: 42rem;
-          margin: 0 auto;
-          padding: 0.2rem 1.25rem;
-        }
-        ul {
-          display: flex;
-          list-style: none;
-          margin-left: 0;
-          padding-left: 0;
-        }
-        li {
-          margin-right: 1rem;
-        }
-        li:first-child {
-          margin-left: auto;
-        }
-        a {
-          color: #fff;
-          text-decoration: none;
-          cursor: pointer;
-        }
-        header {
-          color: #fff;
-          background-color: #333;
+        .navbar-light .navbar-toggler-icon {
+          background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 0, 0, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
         }
       `}</style>
     </header>

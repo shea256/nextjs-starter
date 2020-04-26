@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import Router from 'next/router'
 import Link from 'next/link'
+import { Input, FormGroup } from 'reactstrap'
 import { useUser } from '../lib/hooks'
 
 export default function LoginPage() {
@@ -36,18 +37,20 @@ export default function LoginPage() {
 
   return (
     <>
-      <h1>Login to Example</h1>
+      <h1 className="text-center">
+        Login
+      </h1>
       {errorMsg && <p className="error">{errorMsg}</p>}
       <div className="form-container">
         <form onSubmit={onSubmit}>
-          <label>
+          <FormGroup>
             <span>Username</span>
-            <input type="text" name="username" required />
-          </label>
-          <label>
+            <Input type="text" name="username" required />
+          </FormGroup>
+          <FormGroup>
             <span>Password</span>
-            <input type="password" name="password" required />
-          </label>
+            <Input type="password" name="password" required />
+          </FormGroup>
           <div className="submit">
             <button type="submit">Login</button>
             <Link href="/signup">
@@ -56,6 +59,39 @@ export default function LoginPage() {
           </div>
         </form>
       </div>
+      <style jsx>{`
+        .form-container {
+          max-width: 21rem;
+          margin: 0 auto;
+          padding: 1rem;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+        }
+        .error {
+          color: brown;
+          margin: 0.5rem 0;
+          text-align: center;
+        }
+        .submit {
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          justify-content: space-between;
+        }
+        .submit > button {
+          padding: 0.5rem 1rem;
+          cursor: pointer;
+          background: #fff;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+        }
+        .submit > button:hover {
+          border-color: #888;
+        }
+        .submit > a {
+          text-decoration: none;
+        }
+      `}</style>
     </>
   )
 }
