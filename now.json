@@ -1,0 +1,7 @@
+{
+  "build": {
+    "env": {
+      "TOKEN_SECRET": "@token_secret"
+    }
+  }
+}
