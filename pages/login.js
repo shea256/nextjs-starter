@@ -44,11 +44,11 @@ export default function LoginPage() {
       <div className="form-container">
         <form onSubmit={onSubmit}>
           <FormGroup>
-            <span>Username</span>
+            <label>Username</label>
             <Input type="text" name="username" required />
           </FormGroup>
           <FormGroup>
-            <span>Password</span>
+            <label>Password</label>
             <Input type="password" name="password" required />
           </FormGroup>
           <div className="submit">
